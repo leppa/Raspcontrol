@@ -39,22 +39,23 @@ if (isset($_GET['action']) && isset($_GET['username']) && isset($_GET['password'
     if ($ssh->login($_GET['username'], $_GET['password'])) {
         $action = $_GET['action'];
         if ($action == 'reboot') {
-            echo "Action: " . $_GET["action"] . "\\nSuccessfully perfomed ";
-            $ssh->exec("shutdown -r now");
+            echo "Action: " . $_GET["action"] . "\\nSuccessfully perfomed ";           
+            $ssh->exec("sudo shutdown -r now");
         } else if ($action == 'shutdown') {
             echo "Action: " . $_GET["action"] . "\\nSuccessfully perfomed ";
-            $ssh->exec("shutdown -h now");
+            $ssh->exec("sudo shutdown -h now");
         } else if ($action == 'changeservicestatus') {
             $services = Services::services();
             for ($i = 0; $i < sizeof($services); $i++) {
                 if ($services[$i]['name'] == $_GET['servicename']) {
                     if ($services[$i]['status'] == '+') {
-                        $ssh->exec("service " . $services[$i]['name'] . " stop");
+                        $ssh->exec("sudo service " . $services[$i]['name'] . " stop");
                         echo "Service: " . $services[$i]['name'] . " stopped";
                     } else {
-                        $ssh->exec("service " . $services[$i]['name'] . " start");
+                        $ssh->exec("sudo service " . $services[$i]['name'] . " start");
                         echo "Service: " . $services[$i]['name'] . " started";
                     }
+                    break;
                 }
             }
         } else if ($action == 'changepartitionstatus') {
@@ -63,13 +64,14 @@ if (isset($_GET['action']) && isset($_GET['username']) && isset($_GET['password'
                 if ($disks[$i]['name'] == $_GET['partitionname']) {
                     if ($disks[$i]['mountpoint'] == '') {
                         if (isset($_GET['mountpoint'])) {
-                            $ssh->exec("mount /dev/" . $disks[$i]['name'] . " '" . str_replace("%20", " ", $_GET['mountpoint']) . "'");
+                            $ssh->exec("sudo mount /dev/" . $disks[$i]['name'] . " '" . str_replace("%20", " ", $_GET['mountpoint']) . "'");
                             echo "Partition: " . $disks[$i]['name'] . "\nMounted on: " . str_replace("%20", " ", $_GET['mountpoint']);
                         }
                     } else {
-                        $ssh->exec("umount /dev/" . $disks[$i]['name']);
+                        $ssh->exec("sudo umount /dev/" . $disks[$i]['name']);
                         echo "Partition: " . $disks[$i]['name'] . " unmounted";
                     }
+                    break;
                 }
             }
         }
