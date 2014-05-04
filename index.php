@@ -95,7 +95,7 @@ if (isset($_GET['action']) && isset($_GET['username']) && isset($_GET['password'
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
         <link href="css/raspcontrol.css" rel="stylesheet" media="screen" />
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />    
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     </head>
 
     <body>
@@ -176,7 +176,7 @@ if (isset($_GET['action']) && isset($_GET['username']) && isset($_GET['password'
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <?php
     // load specific scripts
     if ('details' === $_GET['page']) {
