@@ -1,15 +1,17 @@
 <?php
 
-namespace lib;
-
 spl_autoload_extensions('.php');
-spl_autoload_register();
+spl_autoload_register(function ($pClassName) {
+    spl_autoload(str_replace("_", DIRECTORY_SEPARATOR, $pClassName));
+});
+
+set_include_path(get_include_path() . PATH_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "phpseclib");
 
 session_start();
 
 require 'config.php';
 
-require 'lib/phpseclib/Net/SSH2.php';
+require 'Net/SSH2.php';
 
 $ssh = new \Net_SSH2('localhost');
 

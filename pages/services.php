@@ -44,7 +44,7 @@ function label_service($status) {
                 echo label_service($services[$i]['status']), '</a></td>
             <td class="infos">', $services[$i]['name'], '</td>
           </tr>
-          ', ($i == sizeof($hdd) - 1) ? null : '<tr class="service">';
+          ', ($i == sizeof($services) - 1) ? null : '<tr class="service">';
             }
             ?>
     </table>
